@@ -1,24 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import NavComponent from './components/NavComponent';
+import {Switch,Route} from 'react-router-dom';
+import HomeComponent from './components/HomeComponent';
+import AboutUsComponent from './components/AboutUsComponent';
+import ContactListComponent from './components/ContactListComponent';
+import AddContactComponent from './components/AddContactComponent';
+import ContactViewParamComponent from './components/ContactViewParamComponent';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <NavComponent />
+      <hr/>
+      <Switch>
+        <Route path='/' exact component={HomeComponent}/>
+        <Route path='/about' component={AboutUsComponent}/>
+        <Route path='/contacts' component={ContactListComponent}/>
+        <Route path='/add-contact' component={AddContactComponent}/>
+        <Route path='/contact-view/:id' exact component={ContactViewParamComponent}/>
+        {/* <Route path='/contact-view' component={ContactViewComponent}/> */}
+        {/* <Route path='/contact-view' render={()=><ContactViewComponent token='1234'/>}/> */}
+        <Route path='**' render={()=><div style={{color:'red',fontWeight:'bold'}}>404 Not Found</div>} />
+      </Switch>
     </div>
   );
 }
